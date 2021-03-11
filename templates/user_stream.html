@@ -1,0 +1,8 @@
+{% extends "stream.html" %}
+
+{% block content %}
+<h5>Entries</h5>
+<p>{{ user.entries.count() }}</p>
+<div></div>
+{{ super() }}
+{% endblock %}

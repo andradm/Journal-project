@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+            <h1>My Journal</h1>
+            <h2> Hello {% if current_user.is_authenticated %} {{ current_user.username }}{% endif %}!</h2>
+            </div>
+            {% block content %}
+            {%endblock %}
+                &copy; MyJournal
+            </div>
+        </footer>
+    </body>
+</html>
