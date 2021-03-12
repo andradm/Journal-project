@@ -39,8 +39,8 @@ def after_request(response):
 @app.route('/')
 @app.route('/entries')
 def index():
-    stream = models.Entry.select().limit(20).order_by(models.Entry.created_date.desc())
-    return render_template('stream.html', stream=stream)
+    stream = models.Entry.select().limit(20).order_by(models.Entry.date.desc())
+    return render_template('toindex.html', stream=stream)
 
 @app.route('/login', methods=('GET', 'POST'))
 def login():
@@ -84,12 +84,13 @@ def register():
 def new_entry():
     form = forms.EntryForm()
     if form.validate_on_submit():
-        models.Entry.create(user=g.user._get_current_object(),
-                            title=form.title.data.strip(),
-                            time_spent=form.time_spent.data,
-                            content=form.content.data.strip(),
-                            resources=form.resources.data.strip(),
-                            date = form.date.data)
+        models.Entry.create(
+            user=g.user._get_current_object(),
+            title=form.title.data.strip(),
+            time_spent=form.time_spent.data,
+            content=form.content.data.strip(),
+            resources=form.resources.data.strip(),
+            date = form.date.data)
         flash("Entry saved!","success")
         return redirect(url_for('index'))
     return render_template('new.html', form=form)
@@ -98,13 +99,21 @@ def new_entry():
 @app.route('/stream/<username>')
 def stream(username=None):
     template = 'stream.html'
-    if username:
-        try:
+    try:
+        if username and username != current_user.username:
+            user = models.User.select().where(models.User.username**username).get()
+            stream = user.entries.limit(20)
+        else: 
             stream = current_user.get_stream().limit(20)
             user = current_user
+        if username:
             template = 'user_stream.html'
-        except models.DoesNotExist:
-            abort(404)
+        # try:
+        #     user = current_user
+        #     stream = current_user.get_stream().limit(20)
+        #     template = 'user_stream.html'
+    except models.DoesNotExist:
+        abort(404)
     return render_template(template, stream=stream, user=user)
 
 @app.route('/entries/<int:entry_id>')

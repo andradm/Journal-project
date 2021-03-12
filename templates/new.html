@@ -2,15 +2,22 @@
 {% from 'macros.html' import render_field %}
 
 {% block content %}
-<br><h2>New Entry</h2>
-<form method= "POST" action="">
-    {{ form.hidden_tag() }}
-    {% for field in form %}
-        {{ render_field(field) }}
-    {% endfor %}
-    <input type="submit" value="Publish Entry!" class="button">
-    <a href="{{ url_for('index') }}" class="button button-secondary">Cancel</a>
-</form>
+<div class="container">
+    <div class="new-entry">
+        <h2>New Entry</h2>
+        <form method= "POST" action="" class="new-entry">
+            {{ form.hidden_tag() }}
+                {% for field in form %}
+                {% if field.widget.input_type != 'hidden' %} 
+                    {{ field.label }}
+                    {{ render_field(field) }}
+                {% endif %}
+                {% endfor %}
+            <input type="submit" value="Publish Entry!" class="button">
+            <a href="{{ url_for('index') }}" class="button button-secondary">Cancel</a>
+        </form>
+    </div>  
+</div>
 {% endblock %}
 
 

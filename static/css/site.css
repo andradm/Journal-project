@@ -9,6 +9,7 @@ body {
 	color: #404a49;
 	font-family: 'Cousine', serif;
 	font-weight: 400;
+	
 }
 .container {
 	margin: 0 auto;
@@ -147,15 +148,21 @@ ul li a {
 .new-entry {
 	max-width: 800px;
 	margin: 0 auto;
-	padding: 70px 0 150px 0;
+	padding: 70px 0 0 0;
+	font-size: 20px;
+	font-weight: 580;
+	font-family:Helvetica;
+	color:black;
 }
 .edit-entry h2,
 .new-entry h2 {
 	margin-bottom: 35px;
 }
 .entry-list article {
-	margin-bottom: 70px;
+	margin-bottom: 10px;
 	text-align: center;
+	font-size: 20px;
+	color: black;
 }
 .entry-list article:last-child {
 	margin-bottom: 0;
@@ -171,8 +178,10 @@ ul li a {
 }
 .entry {
 	max-width: 800px;
-	margin: 75px auto 0 auto;
-	text-align: left;
+	margin: 30px auto 0 auto;
+	text-align: center;
+	color: black;
+	padding-bottom: 30px;
 }
 .entry p {
 	margin-bottom: 40px;
@@ -198,6 +207,9 @@ ul li a {
 form label {
 	display: block;
 	margin-bottom: 8px;
+	font-size: 18px;
+	font-weight: 580;
+	color: black;
 }
 form input[type=text],
 form input[type=password],
@@ -235,16 +247,35 @@ input[type=submit] {
 	word-spacing:10x;
 }
 
-.notification {
+.notificationerror {
 	background-color: red;
 	color: white;
 	font-size: 20px;
+	padding:1rem 2rem;
+	text-align: center;
 }
 
+.notificationsuccess {
+	font-size:20px;
+	background-color: green;
+	color: white;
+	padding:1rem 2rem;
+	text-align: center;
+}
 
+.notificationmessage {
+	font-size:20px;
+	background-color: blue;
+	color: white;
+	padding:1rem 2rem;
+	text-align: center;
+}
 
-
-
+.notification.error {
+	color: red;
+	font-weight:300;
+	font-size: 16px;
+}
 
 
 
